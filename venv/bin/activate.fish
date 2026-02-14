@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/workspaces/BE-Capstone-Project-Recipe-Management-API/venv"
+set -gx VIRTUAL_ENV "/workspaces/BE-Capstone-Projects/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
