@@ -1,4 +1,4 @@
-#!/workspaces/BE-Capstone-Project-Recipe-Management-API/Recipe_Management_API/venv/bin/python3
+#!/workspaces/BE-Capstone-Projects/Recipe_Management_API/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
