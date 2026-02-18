@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'recipes',
+    'corsheaders',  
 ]
 
 
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = "Recipe_Management_API.urls"
@@ -131,6 +133,8 @@ STATIC_URL = "static/"
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
+    "http://localhost:8080",      # add this
+    "https://localhost:8080", 
 ]
 from datetime import timedelta
 
@@ -146,4 +150,20 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
        ],
+    # 📄 Pagination
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5,
 }
+
+# CORS settings
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "https://localhost:8000",
+    "http://127.0.0.1:8000",
+    "https://127.0.0.1:8000",
+]
+# For development only - allow all origins
+CORS_ALLOW_ALL_ORIGINS = True  # Only use this in development!
+
+# If you want to allow credentials (cookies, authorization headers)
+CORS_ALLOW_CREDENTIALS = True
