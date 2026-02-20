@@ -352,6 +352,10 @@ Contributions are welcome! Please follow these steps:
 Please ensure your code follows PEP 8 guidelines and includes appropriate tests.
 
 ---
+# Create new venv
+python -m venv venv
+source venv/bin/activate
+
 
 ## 📝 License
 
