@@ -1,4 +1,3 @@
-# recipes/models.py
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -29,7 +28,10 @@ class Recipe(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-    ingredients = models.ManyToManyField(Ingredient, through="RecipeIngredient")
+    ingredients = models.ManyToManyField(
+        Ingredient,
+        through="RecipeIngredient"
+    )
 
     def __str__(self):
         return self.title

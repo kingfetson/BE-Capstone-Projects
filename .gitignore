@@ -6,6 +6,8 @@ __pycache__/
 *.pyc
 
 # Environment variables
+.vscode
+.venv1
 .env
 .venvi
 # Database (optional for dev)
@@ -15,3 +17,5 @@ db.sqlite3
 
 source
 >>>>>>> bc9ff1d (Add .gitignore and remove virtual environment)
+db.sqlite3
+*.sqlite3
