@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: Recipe_Management_API
+
     steps:
     - uses: actions/checkout@v4
 
@@ -24,9 +28,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run migrations
-      run: |
-        python manage.py migrate
+      run: python manage.py migrate
 
     - name: Run tests
-      run: |
-        python manage.py test
+      run: python manage.py test
