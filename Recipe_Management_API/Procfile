@@ -1,0 +1,1 @@
+web: gunicorn Recipe_Management_API.wsgi
