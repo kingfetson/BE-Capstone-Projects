@@ -14,7 +14,7 @@ __pycache__/
 db.sqlite3
 <<<<<<< HEAD
 =======
-
+venv
 source
 >>>>>>> bc9ff1d (Add .gitignore and remove virtual environment)
 db.sqlite3
