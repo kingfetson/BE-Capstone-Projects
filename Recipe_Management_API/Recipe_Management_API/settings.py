@@ -167,3 +167,22 @@ CORS_ALLOW_ALL_ORIGINS = True  # Only use this in development!
 
 # If you want to allow credentials (cookies, authorization headers)
 CORS_ALLOW_CREDENTIALS = True
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Recipe Management API",
+    "DESCRIPTION": "API for managing recipes, categories, and ingredients.",
+    "VERSION": "1.0.0",
+    "COMPONENT_SPLIT_REQUEST": True,
+    "SECURITY": [{"BearerAuth": []}],
+    "AUTHENTICATION_WHITELIST": [],
+}
+
+SPECTACULAR_SETTINGS["COMPONENTS"] = {
+    "securitySchemes": {
+        "BearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT",
+        }
+    }
+}
