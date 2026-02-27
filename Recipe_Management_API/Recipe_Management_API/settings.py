@@ -1,17 +1,23 @@
 import os
 from pathlib import Path
 import dj_database_url
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "your-secret-key-change-in-production"
+# ==========================
+# Security
+# ==========================
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False") == "True"
+SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-change-in-production")
+
+# Default to True locally
+DEBUG = os.getenv("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 
-# Application definition
+# ==========================
+# Application Definition
+# ==========================
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -32,6 +38,14 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+
+    # Only use WhiteNoise in production
+    *(
+        ["whitenoise.middleware.WhiteNoiseMiddleware"]
+        if not DEBUG
+        else []
+    ),
+
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -60,25 +74,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "Recipe_Management_API.wsgi.application"
 
-# Database (SQLite for development)
-
-
+# ==========================
+# Database
+# ==========================
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL)
+        "default": dj_database_url.parse(DATABASE_URL)
     }
 else:
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
 
-# Password validation
+# ==========================
+# Password Validation
+# ==========================
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -95,20 +111,25 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# ==========================
 # Internationalization
+# ==========================
 
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_TZ = True
 
-# Static files
+# ==========================
+# Static Files
+# ==========================
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+# Only use compressed storage in production
+if not DEBUG:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
