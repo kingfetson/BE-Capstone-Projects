@@ -86,7 +86,7 @@ RecipeIngredient (Through Model)
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/Recipe_Management_API.git
+   git clone https://github.com/kingfestus/Recipe_Management_API.git
    cd Recipe_Management_API
    ```
 
