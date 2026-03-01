@@ -15,6 +15,25 @@ DEBUG = os.getenv("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 
+# First define CSRF_TRUSTED_ORIGINS
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "http://localhost:8000,https://localhost:8000,http://127.0.0.1:8000,https://127.0.0.1:8000").split(",")
+
+# Then add Codespace URL if it exists
+codespace_name = os.getenv('CODESPACE_NAME')
+if codespace_name:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{codespace_name}-8001.githubpreview.dev')
+    # Also add the 8000 port version in case you run on that port
+    CSRF_TRUSTED_ORIGINS.append(f'https://{codespace_name}-8000.githubpreview.dev')
+
+# You might also want to add these for better compatibility
+CSRF_TRUSTED_ORIGINS.extend([
+    'https://*.githubpreview.dev',
+    'http://localhost:8001',
+    'https://localhost:8001',
+    'http://127.0.0.1:8001',
+    'https://127.0.0.1:8001',
+])
+
 # ==========================
 # Application Definition
 # ==========================
@@ -38,14 +57,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-
-    # Only use WhiteNoise in production
-    *(
-        ["whitenoise.middleware.WhiteNoiseMiddleware"]
-        if not DEBUG
-        else []
-    ),
-
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",

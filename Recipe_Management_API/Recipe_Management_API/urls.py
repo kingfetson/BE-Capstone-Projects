@@ -26,10 +26,10 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
     SpectacularRedocView,
 )
-
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+      path('admin/', admin.site.urls),
 
     # JWT endpoints
     path("api/auth/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
